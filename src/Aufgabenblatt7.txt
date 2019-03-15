@@ -1,0 +1,3 @@
+Laden Sie die Aufgabenstellung (ep2-ta19.pdf) von TISS herunter und setzen Sie sie um.
+
+Laden Sie die zusätzlichen Eingabedaten von ... herunter und entpacken Sie sie in das Verzeichnis "data".
