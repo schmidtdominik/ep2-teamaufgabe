@@ -93,3 +93,13 @@ local.properties
 
 # Testing environment specific
 derby.log
+
+
+######################
+# Testdata
+######################
+/data/**
+initial-collectors-?.csv
+queries-?.txt
+!/data/initial-collectors-0.csv
+!/data/queries-0.txt
