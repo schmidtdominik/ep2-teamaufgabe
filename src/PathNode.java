@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class PathNode implements TrieNode {
 
     TrieNode[] subnodes = new TrieNode[26];
@@ -45,24 +43,39 @@ public class PathNode implements TrieNode {
         }
     }
 
-    public void ping(char[] id, int idIndex, boolean diverged) {
+    public LeafNode getCollector(char[] id, int idIndex, boolean diverged) {
         int index = (int) id[idIndex] - 97;
         if (!diverged && subnodes[index] != null) {
-            subnodes[index].ping(id, idIndex + 1, diverged);
-            return;
+            return subnodes[index].getCollector(id, idIndex + 1, diverged);
         }
 
         for (TrieNode subnode : subnodes) {
             if (subnode != null) {
                 id[idIndex] = subnode.getValue();
-                subnode.ping(id, idIndex+1, true);
-                return;
+                return subnode.getCollector(id, idIndex+1, true);
             }
         }
+
+        System.out.println("oje gibt ein problem hier kann nicht erreicht werden");
+        return null; // sollte nicht erreicht werden können
     }
 
     @Override
-    public boolean remove(String id) {
-        return false; // TODO
+    public boolean remove(char[] id, int idIndex) {
+        int index = (int) id[idIndex] - 97;
+        boolean preserveBranch = subnodes[index].remove(id, idIndex+1);
+
+        if (!preserveBranch) {
+            subnodes[index] = null;
+        }
+
+        for (TrieNode subnode : subnodes) {
+            if (subnode != null) {
+                preserveBranch = true;
+                break;
+            }
+        }
+
+        return preserveBranch;
     }
 }

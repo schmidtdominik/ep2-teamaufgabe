@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class LeafNode implements TrieNode {
 
     private char value;
-    private char[] id;
+    public char[] id;
 
     private int totalRequests;
     private int requestsSinceSplit;
@@ -33,7 +33,11 @@ public class LeafNode implements TrieNode {
     }
 
     @Override
-    public void ping(char[] id, int idIndex, boolean diverged) {
+    public LeafNode getCollector(char[] id, int idIndex, boolean diverged) {
+        return this;
+    }
+
+    public int access() {
         accessed = true;
         totalRequests++;
         requestsSinceSplit++;
@@ -43,14 +47,17 @@ public class LeafNode implements TrieNode {
         System.out.println(totalRequests);
         System.out.println(requestsSinceSplit);
 
-        /*if (totalRequests >= 1000) {
-            // remove this.id
-            // put id
-        }*/
+        if (totalRequests >= 1000) {
+            return 1;
+        } else if (requestsSinceSplit >= 250) {
+            return 2;
+        }
+
+        return -1;
     }
 
     @Override
-    public boolean remove(String id) {
-        return false; // TODO
+    public boolean remove(char[] id, int idIndex) {
+        return false;
     }
 }
