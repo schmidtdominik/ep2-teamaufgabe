@@ -69,5 +69,6 @@ public class LeafNode implements TrieNode {
         if (!accessed) {
             root.remove(id, 0);
         }
+        accessed = false;
     }
 }

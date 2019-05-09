@@ -15,7 +15,7 @@ public class SimulationRunner {
         String lastDisabled = "";
         String lastEnabled = "";
 
-        try (Scanner s = new Scanner(new File(System.getProperty("user.dir") + "/data/initial-collectors-5.csv"), "UTF-8")) {
+        try (Scanner s = new Scanner(new File(System.getProperty("user.dir") + "/data/initial-collectors-3.csv"), "UTF-8")) {
 
             while (s.hasNextLine()) {
                 String line = s.nextLine();
@@ -35,7 +35,7 @@ public class SimulationRunner {
         minSize = Math.min(currentSize, minSize);
         maxSize = Math.max(currentSize, maxSize);
 
-        try (Scanner s = new Scanner(new File(System.getProperty("user.dir") + "/data/queries-5.txt"), "UTF-8")) {
+        try (Scanner s = new Scanner(new File(System.getProperty("user.dir") + "/data/queries-3.txt"), "UTF-8")) {
             while (s.hasNextLine()) {
 
                 char[] sensorId = s.nextLine().toCharArray();
