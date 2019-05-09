@@ -42,7 +42,7 @@ public class LeafNode implements TrieNode {
         totalRequests++;
         requestsSinceSplit++;
 
-        System.out.println("collector accessed: " + new String(id) + " [totalRequests=" + totalRequests + ", requestsSinceSplit=" + requestsSinceSplit + "]");
+        //System.out.println("collector accessed: " + new String(id) + " [totalRequests=" + totalRequests + ", requestsSinceSplit=" + requestsSinceSplit + "]");
 
         if (totalRequests >= 1000) {
             return 1;
@@ -57,5 +57,17 @@ public class LeafNode implements TrieNode {
     @Override
     public boolean remove(char[] id, int idIndex) {
         return false;
+    }
+
+    @Override
+    public int getSize() {
+        return 1;
+    }
+
+    @Override
+    public void removeUnused(PathNode root) {
+        if (!accessed) {
+            root.remove(id, 0);
+        }
     }
 }

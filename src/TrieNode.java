@@ -10,4 +10,7 @@ public interface TrieNode {
 
     public LeafNode getCollector(char[] id, int idIndex, boolean diverged);
 
+    public int getSize();
+
+    public void removeUnused(PathNode root);
 }

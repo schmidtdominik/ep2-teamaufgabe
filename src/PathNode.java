@@ -78,4 +78,24 @@ public class PathNode implements TrieNode {
 
         return preserveBranch;
     }
+
+    @Override
+    public int getSize() {
+        int size = 0;
+        for (TrieNode subnode : subnodes) {
+            if (subnode != null) {
+                size += subnode.getSize();
+            }
+        }
+        return size;
+    }
+
+    @Override
+    public void removeUnused(PathNode root) {
+        for (TrieNode subnode : subnodes) {
+            if (subnode != null) {
+                subnode.removeUnused(root);
+            }
+        }
+    }
 }
