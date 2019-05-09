@@ -9,8 +9,8 @@ public class SimulationRunner {
         PathNode root = new PathNode('\0');
 
         int totalNetworkRequests = 0;
-        char[] lastDisabled = "".toCharArray();
-        char[] lastEnabled = "".toCharArray();
+        String lastDisabled = "";
+        String lastEnabled = "";
 
         try (Scanner s = new Scanner(new File(System.getProperty("user.dir") + "/data/initial-collectors-0.csv"), "UTF-8")) {
 
@@ -32,20 +32,19 @@ public class SimulationRunner {
             while (s.hasNextLine()) {
 
                 char[] sensorId = s.nextLine().toCharArray();
-                char[] sensorIdCopy = Arrays.copyOf(sensorId, sensorId.length);
                 LeafNode col = root.getCollector(sensorId, 0, false);
-
-
+                System.out.println("requesting sensor: " + new String(sensorId));
                 int status = col.access();
                 totalNetworkRequests++;
 
                 if (status == 1) {
-                    lastDisabled = col.id;
+                    lastDisabled = new String(col.id);
                     root.remove(col.id, 0);
-                    lastEnabled = sensorId;
+                    System.out.println("Disabled " + lastDisabled);
                     root.put(sensorId, 0, 0, 0);
                 } else if (status == 2) {
-                    lastEnabled = sensorId;
+                    lastEnabled = new String(sensorId);
+                    System.out.println("Enabled " + lastEnabled);
                     root.put(sensorId, 0, 0, 0);
                 }
 
@@ -54,7 +53,7 @@ public class SimulationRunner {
             System.exit(1);
         }
 
-        System.out.println(Arrays.toString(lastEnabled));
-        System.out.println(Arrays.toString(lastDisabled));
+        System.out.println(lastDisabled);
+        System.out.println(lastEnabled);
     }
 }

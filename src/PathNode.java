@@ -51,7 +51,7 @@ public class PathNode implements TrieNode {
 
         for (TrieNode subnode : subnodes) {
             if (subnode != null) {
-                id[idIndex] = subnode.getValue();
+                // id[idIndex] = subnode.getValue(); char arrac nicht ändern!
                 return subnode.getCollector(id, idIndex+1, true);
             }
         }

@@ -42,14 +42,12 @@ public class LeafNode implements TrieNode {
         totalRequests++;
         requestsSinceSplit++;
 
-        System.out.println("sensor: " + Arrays.toString(id));
-        System.out.println("collector: " + Arrays.toString(this.id));
-        System.out.println(totalRequests);
-        System.out.println(requestsSinceSplit);
+        System.out.println("collector accessed: " + new String(id) + " [totalRequests=" + totalRequests + ", requestsSinceSplit=" + requestsSinceSplit + "]");
 
         if (totalRequests >= 1000) {
             return 1;
         } else if (requestsSinceSplit >= 250) {
+            requestsSinceSplit = 0;
             return 2;
         }
 
