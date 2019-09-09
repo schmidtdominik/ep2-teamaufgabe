@@ -103,3 +103,5 @@ initial-collectors-?.csv
 queries-?.txt
 !/data/initial-collectors-0.csv
 !/data/queries-0.txt
+!/data/initial-collectors-1.csv
+!/data/queries-1.txt
